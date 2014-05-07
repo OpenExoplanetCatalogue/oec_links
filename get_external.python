@@ -1,0 +1,99 @@
+#!/bin/python
+import urllib
+import os
+import xml.etree.ElementTree as ET 
+
+# Nicely indents the XML output 
+def indent(elem, level=0):
+    i = "\n" + level*"\t"
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "\t"
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level+1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
+# Removes empty nodes from the tree
+def removeemptytags(elem):
+    if elem.text:
+        elem.text = elem.text.strip()
+    toberemoved = []
+    for child in elem:
+        if len(child) == 0 and len(child.text)==0 and len(child.attrib) == 0:
+            toberemoved.append(child)
+    for child in toberemoved:
+        elem.remove(child)
+    for child in elem:
+        removeemptytags(child)
+        # Convert error to errorminus and errorplus
+    if 'ep' in elem.attrib:
+        err = elem.attrib['ep']
+        del elem.attrib['ep']
+        elem.attrib['errorplus'] = err
+    if 'em' in elem.attrib:
+        err = elem.attrib['em']
+        del elem.attrib['em']
+        elem.attrib['errorminus'] = err
+    if 'error' in elem.attrib:
+        err = elem.attrib['error']
+        del elem.attrib['error']
+        elem.attrib['errorminus'] = err
+        elem.attrib['errorplus'] = err
+
+
+#####################
+# Exoplanet.eu
+#####################
+
+
+
+# implement download of exoplanet data here
+url_exoplaneteu = "http://exoplanet.eu/catalog/csv/"
+# urllib.urlretrieve (url_exoplaneteu, "exoplaneteu/exoplanet.eu_catalog.csv")
+
+# delete olf data
+os.system("rm systems_exoplaneteu/*.xml")
+
+# parse data into default xml format
+f = open("exoplaneteu/exoplanet.eu_catalog.csv")
+header = [x.strip() for x in f.readline()[1:].split(",")]
+for line in f:
+	p = dict(zip(header, [x.strip() for x in line.split(",")]))
+ 	
+	# TODO: Check that system already exists. If so, add planets.
+	system = ET.Element("system")
+	ET.SubElement(system, "name").text = p["star_name"]
+	# TODO: Convert ra and dec to hh mm ss format.
+	ET.SubElement(system, "rightascension").text = p["ra"]
+	ET.SubElement(system, "declination").text = p["dec"]
+	ET.SubElement(system, "distance").text = p["star_distance"]
+
+	star = ET.SubElement(system,"star")
+	ET.SubElement(star, "name").text = p["star_name"]
+	ET.SubElement(star, "age").text = p["star_age"]
+	ET.SubElement(star, "radius").text = p["star_radius"]
+	ET.SubElement(star, "mass").text = p["star_mass"]
+	ET.SubElement(star, "spectraltype").text = p["star_sp_type"]
+	ET.SubElement(star, "temperature").text = p["star_teff"]
+	ET.SubElement(star, "metallicity").text = p["star_metallicity"]
+
+
+	# TODO: Add planet.
+
+	# Cleanup and write file
+	removeemptytags(system)
+	indent(system)
+	outputfilename = "systems_exoplaneteu/"+p["star_name"]+".xml"
+	ET.ElementTree(system).write(outputfilename) 
+
+
+
+
+
+
