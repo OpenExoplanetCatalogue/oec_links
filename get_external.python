@@ -3,6 +3,17 @@ import urllib
 import os
 import xml.etree.ElementTree as ET 
 
+#####################
+# Configuration
+#####################
+url_exoplaneteu = "http://exoplanet.eu/catalog/csv/"
+downloadnewdata = 0
+
+
+#####################
+# Helper functions
+#####################
+
 # Nicely indents the XML output 
 def indent(elem, level=0):
     i = "\n" + level*"\t"
@@ -47,18 +58,25 @@ def removeemptytags(elem):
         elem.attrib['errorplus'] = err
 
 
+def ensure_empty_dir(f):
+	if os.path.exists(f):
+		for fileName in os.listdir(f):
+			os.remove(f+"/"+fileName)
+	else:
+		os.makedirs(f)
+	
+
 #####################
 # Exoplanet.eu
 #####################
 
 
+if downloadnewdata:
+	ensure_empty_dir("exoplaneteu")
+	urllib.urlretrieve (url_exoplaneteu, "exoplaneteu/exoplanet.eu_catalog.csv")
 
-# implement download of exoplanet data here
-url_exoplaneteu = "http://exoplanet.eu/catalog/csv/"
-# urllib.urlretrieve (url_exoplaneteu, "exoplaneteu/exoplanet.eu_catalog.csv")
-
-# delete olf data
-os.system("rm systems_exoplaneteu/*.xml")
+# delete old data
+ensure_empty_dir("systems_exoplaneteu")
 
 # parse data into default xml format
 f = open("exoplaneteu/exoplanet.eu_catalog.csv")
