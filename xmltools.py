@@ -1,8 +1,19 @@
 #!/bin/python
+import urllib
+import os
+import xml.etree.ElementTree as ET 
 
 #####################
 # Helper functions
 #####################
+
+# Check for directory
+def ensure_empty_dir(f):
+	if os.path.exists(f):
+		for fileName in os.listdir(f):
+			os.remove(f+"/"+fileName)
+	else:
+		os.makedirs(f)
 
 # Nicely indents the XML output 
 def indent(elem, level=0):
