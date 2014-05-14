@@ -41,7 +41,7 @@ def parse():
 
 
         # TODO: Add planet.
-        planet = ET.SubElement(system,"planet")
+        planet = ET.SubElement(star,"planet")
         ET.SubElement(planet, "name").text = p["name"]
 
         # Cleanup and write file
