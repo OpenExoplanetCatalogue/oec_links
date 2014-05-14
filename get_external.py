@@ -13,7 +13,7 @@ import exoplanetarchive
 exoplaneteu.get()
 exoplaneteu.parse()
 
-#exoplanetarchive.get()
-#exoplanetarchive.parse()
+exoplanetarchive.get()
+exoplanetarchive.parse()
 
 

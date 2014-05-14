@@ -1,4 +1,4 @@
-#!/bin/python 
+#!/usr/bin/python 
 import urllib
 import os
 import xml.etree.ElementTree as ET 
@@ -51,4 +51,6 @@ def parse():
         ET.ElementTree(system).write(outputfilename) 
 
 
-
+if __name__=="__main__":
+    get()
+    parse()

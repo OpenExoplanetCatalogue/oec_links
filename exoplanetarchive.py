@@ -1,4 +1,4 @@
-#!/bin/python 
+#!/usr/bin/python 
 import urllib
 import os
 import xml.etree.ElementTree as ET 
@@ -7,7 +7,7 @@ import xmltools
 #####################
 # Exoplanet Archive
 #####################
-url_exoplanetarchive = "http://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,ra,dec&order=dec&format=csv"
+url_exoplanetarchive = "http://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&format=csv"
 
 def get():
     xmltools.ensure_empty_dir("exoplanetarchive")
@@ -35,6 +35,8 @@ def parse():
         # TODO: Add remaining stellar parameters
 
         # TODO: Add planet.
+        planet = ET.SubElement(star,"planet")
+        ET.SubElement(planet, "name").text = p["pl_hostname"]+" "+p["pl_letter"]
 
         # Cleanup and write file
         xmltools.removeemptytags(system)
@@ -43,4 +45,6 @@ def parse():
         ET.ElementTree(system).write(outputfilename) 
 
 
-
+if __name__=="__main__":
+    get()
+    parse()
