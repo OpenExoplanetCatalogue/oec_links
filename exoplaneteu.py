@@ -41,6 +41,8 @@ def parse():
 
 
         # TODO: Add planet.
+        planet = ET.SubElement(system,"planet")
+        ET.SubElement(planet, "name").text = p["name"]
 
         # Cleanup and write file
         xmltools.removeemptytags(system)

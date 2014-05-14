@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 import urllib
 import os
 import xml.etree.ElementTree as ET 
@@ -10,10 +10,10 @@ import exoplanetarchive
 #####################
 
 	
-#exoplaneteu.get()
-#exoplaneteu.parse()
+exoplaneteu.get()
+exoplaneteu.parse()
 
-exoplanetarchive.get()
-exoplanetarchive.parse()
+#exoplanetarchive.get()
+#exoplanetarchive.parse()
 
 
