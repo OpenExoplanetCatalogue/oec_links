@@ -23,16 +23,20 @@ def parse():
     for line in f:
         p = dict(zip(header, [x.strip() for x in line.split(",")]))
         
-        # TODO: Check that system already exists. If so, add planets.
-        system = ET.Element("system")
-        ET.SubElement(system, "name").text = p["pl_hostname"]
-        # TODO: Convert ra and dec to hh mm ss format.
-        ET.SubElement(system, "rightascension").text = p["ra"]
-        ET.SubElement(system, "declination").text = p["dec"]
+        outputfilename = "systems_exoplanetarchive/"+p["pl_hostname"]+".xml"
+        if os.path.exists(outputfilename):
+            system = ET.parse(outputfilename).getroot()
+            star = system.find(".//star")
+        else:
+            system = ET.Element("system")
+            ET.SubElement(system, "name").text = p["pl_hostname"]
+            # TODO: Convert ra and dec to hh mm ss format.
+            ET.SubElement(system, "rightascension").text = p["ra"]
+            ET.SubElement(system, "declination").text = p["dec"]
 
-        star = ET.SubElement(system,"star")
-        ET.SubElement(star, "name").text = p["pl_hostname"]
-        # TODO: Add remaining stellar parameters
+            star = ET.SubElement(system,"star")
+            ET.SubElement(star, "name").text = p["pl_hostname"]
+            # TODO: Add remaining stellar parameters
 
         # TODO: Add planet.
         planet = ET.SubElement(star,"planet")
@@ -41,7 +45,6 @@ def parse():
         # Cleanup and write file
         xmltools.removeemptytags(system)
         xmltools.indent(system)
-        outputfilename = "systems_exoplanetarchive/"+p["pl_hostname"]+".xml"
         ET.ElementTree(system).write(outputfilename) 
 
 

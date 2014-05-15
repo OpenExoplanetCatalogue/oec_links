@@ -4,6 +4,7 @@ import os, glob
 import xml.etree.ElementTree as ET 
 
 aliases = {}
+uniquelist = {}
 
 for filename in glob.glob("open_exoplanet_catalogue/systems/*.xml"):
     # Parse file
@@ -14,15 +15,20 @@ for filename in glob.glob("open_exoplanet_catalogue/systems/*.xml"):
     # Do loop on a per planet basis (the other catalogues don't understand binaries)
     for planet in root.findall(".//planet"):
         planetid = planet.findtext("name") # first element is id
+        if root.findtext(".//name") !="Sun":  # ignore solar system
+            uniquelist[planetid] = 0
         for name in planet.findall("name"):
             aliases[name.text] =planetid
             aliases[name.text.lower()] =planetid
             aliases[name.text.replace(" ","")] =planetid
             aliases[name.text.lower().replace(" ","")] =planetid
+            aliases[name.text.lower().replace(" ","").replace("-","")] =planetid
 
+#catalogues = ["exoplaneteu"]
 catalogues = ["exoplaneteu", "exoplanetarchive"]
 for catalogue in catalogues:
-    for filename in glob.glob("systems_exoplanetarchive/*.xml"):
+    uniquelist_cat = uniquelist
+    for filename in glob.glob("systems_"+catalogue+"/*.xml"):
         # Parse file
         root = ET.parse(filename).getroot()
 
@@ -39,9 +45,18 @@ for catalogue in catalogues:
                 key = planetid.replace(" ","")
             elif planetid.lower().replace(" ","") in aliases:
                 key = planetid.lower().replace(" ","")
+            elif planetid.lower().replace(" ","").replace("-","") in aliases:
+                key = planetid.lower().replace(" ","").replace("-","")
             else:
-                print "No link to OEC found: \"\033[1m"+planetid+"\033[0m\"  (" + catalogue +")"
+                print "%s contains \033[1m%s\033[0m which is not in OEC." %( catalogue,planetid)
+            if key is not None:
+                uniquelist_cat[aliases[key]] = 1
 
+    notaccountedfor = []
+    for key in uniquelist_cat:
+        if uniquelist_cat[key]==0:
+            notaccountedfor.append(key)
                 
+    print "OEC contains \033[1m%d\033[0m planets which are not in %s." %(len(notaccountedfor),catalogue)
 
 
