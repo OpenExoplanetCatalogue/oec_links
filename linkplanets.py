@@ -47,16 +47,35 @@ for catalogue in catalogues:
                 key = planetid.lower().replace(" ","")
             elif planetid.lower().replace(" ","").replace("-","") in aliases:
                 key = planetid.lower().replace(" ","").replace("-","")
-            else:
-                print "%s contains \033[1m%s\033[0m which is not in OEC." %( catalogue,planetid)
             if key is not None:
                 uniquelist_cat[aliases[key]] = 1
+            else:
+                if planetid.replace("Gliese", "GJ") in aliases:
+                    key = planetid.replace("Gliese", "GJ") 
+                    print "%s contains \033[91m%s\033[0m which is different than  \033[91m%s\033[0m in OEC." %( catalogue,planetid, key)
+                elif planetid.replace("GJ", "Gliese") in aliases:
+                    key = planetid.replace("GJ", "Gliese") 
+                    print "%s contains \033[91m%s\033[0m which is different than  \033[91m%s\033[0m in OEC." %( catalogue,planetid, key)
+                elif planetid.replace("Gj", "Gliese") in aliases:
+                    key = planetid.replace("Gj", "Gliese")
+                    print "%s contains \033[91m%s\033[0m which is different than  \033[91m%s\033[0m in OEC." %( catalogue,planetid, key)
+                elif planetid + " b" in aliases:
+                    key = planetid + " b" 
+                    print "%s contains \033[91m%s\033[0m which is different than  \033[91m%s\033[0m in OEC." %( catalogue,planetid, key)
+                else:
+                    print "%s contains \033[1m%s\033[0m which is not in OEC." %( catalogue,planetid)
+                if key is not None:
+                    uniquelist_cat[aliases[key]] = 2
 
     notaccountedfor = []
+    differentlynamed = []
     for key in uniquelist_cat:
         if uniquelist_cat[key]==0:
             notaccountedfor.append(key)
+        elif uniquelist_cat[key]==2:
+            differentlynamed.append(key)
+
                 
     print "OEC contains \033[1m%d\033[0m planets which are not in %s." %(len(notaccountedfor),catalogue)
-
+    print "OEC contains \033[91m%d\033[0m planets which are differently named than in %s." %(len(differentlynamed),catalogue)
 
