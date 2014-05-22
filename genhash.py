@@ -5,20 +5,22 @@ import time
 from os import listdir
 from os.path import isfile
 
+hashes = None
+
+
 def store_hash(filepath, catalogue):
+    global hashes
     """ Generates and stores the has value for the file and catalogue"""
 
 
     # generate hash
     m = hashlib.sha1()
     m.update(open(filepath).read())
+    fphash = m.hexdigest()
     
-    # get hash tree
-    tree = ET.parse("hashes/systemhashes.xml")
-    hashes = tree.getroot()
 
     filename = filepath[filepath.rfind("/")+1:]
-    system = hashes.find(".//system[filename='"+filename+"']")
+    system = hashes.find("./system[filename='"+filename+"']")
     if system is None:
         # add the new hash for the file
         system = ET.Element("system")
@@ -28,7 +30,7 @@ def store_hash(filepath, catalogue):
         hashes.append(system)
 
     # update the hash
-    planet_catalogue = system.find(".//catalogue[name='"+catalogue+"']")
+    planet_catalogue = system.find("./catalogue[name='"+catalogue+"']")
     if planet_catalogue is None:
         # create new catalogue tag
         planet_catalogue = ET.Element("catalogue")
@@ -42,13 +44,11 @@ def store_hash(filepath, catalogue):
         system.append(planet_catalogue)
 
     planet_catalogue_hash = planet_catalogue.find("./hash")
-    if planet_catalogue_hash.text != m.hexdigest():
+    if planet_catalogue_hash.text != fphash:
         # hash is new, update it and change date 
-        planet_catalogue_hash.text = m.hexdigest()
+        planet_catalogue_hash.text = fphash
         planet_catalogue_date = planet_catalogue.find(".//date")
         planet_catalogue_date.text = time.strftime("%d/%m/%y")
-        xmltools.indent(system)
-        tree.write("hashes/systemhashes.xml")
         print "stored hash for: " + filename
 
 def openexohash():
@@ -64,8 +64,11 @@ def archivehash():
         store_hash("systems_exoplanetarchive/"+f, "exoplanet archive")
 
 if __name__ == "__main__":
+    hashes = ET.parse("hashes/systemhashes.xml").getroot()
+
     openexohash()
     euhash()
     archivehash()
 
-
+    xmltools.indent(hashes)
+    ET.ElementTree(hashes).write("hashes/systemhashes.xml")
