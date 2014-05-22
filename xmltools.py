@@ -37,7 +37,12 @@ def removeemptytags(elem):
         elem.text = elem.text.strip()
     toberemoved = []
     for child in elem:
-        if len(child) == 0 and len(child.text)==0 and len(child.attrib) == 0:
+        if len(child.attrib) != 0:
+            if 'errorplus' in child.attrib and (child.attrib['errorplus'] == None or child.attrib['errorplus'] == ""):
+                del child.attrib['errorplus']
+            if 'errorminus' in child.attrib and (child.attrib['errorminus'] == None or child.attrib['errorminus'] == ""):
+                del child.attrib['errorminus']
+        if child is None or (len(child) == 0 and len(child.text) == 0 and len(child.attrib) == 0):
             toberemoved.append(child)
     for child in toberemoved:
         elem.remove(child)
@@ -57,4 +62,14 @@ def removeemptytags(elem):
         del elem.attrib['error']
         elem.attrib['errorminus'] = err
         elem.attrib['errorplus'] = err
+
+def get_exceptions():
+    """ Returns a dictionary of the exception names, with the key as the improper name"""
+
+    f = open("identifierexceptions.txt")
+    exceptiondict = {}
+    for line in f:
+        if line != "":
+            exceptiondict[line.split(":::")[0]] = line.split(":::")[1].strip("\n")
+    return exceptiondict
 

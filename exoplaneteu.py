@@ -3,6 +3,8 @@ import urllib
 import os
 import xml.etree.ElementTree as ET 
 import xmltools
+import genhash
+import csv
 #####################
 # Exoplanet.eu
 #####################
@@ -18,24 +20,42 @@ def parse():
 
     # parse data into default xml format
     f = open("exoplaneteu/exoplanet.eu_catalog.csv")
-    header = [x.strip() for x in f.readline()[1:].split(",")]
-    for line in f:
-        p = dict(zip(header, [x.strip() for x in line.split(",")]))
+    header = [x.strip() for x in f.readline()[1:].replace("# ", "").split(",")]
+    reader = csv.reader(f)
+    for line in reader:
+        p = dict(zip(header, line))
         outputfilename = "systems_exoplaneteu/"+p["star_name"]+".xml"
         if os.path.exists(outputfilename):
             system = ET.parse(outputfilename).getroot()
             star = system.find(".//star")
         else:
             system = ET.Element("system")
-
-            # TODO: Check that system already exists. If so, add planets.
             ET.SubElement(system, "name").text = p["star_name"]
-            # TODO: Convert ra and dec to hh mm ss format.
-            ET.SubElement(system, "rightascension").text = p["ra"]
-            ET.SubElement(system, "declination").text = p["dec"]
-            ET.SubElement(system, "distance").text = p["star_distance"]
+          
+            # convert the right ascension to hh mm ss
+            tempra = ""
+            ra = float(p['ra'])
+            hours = ra / 360 * 24
+            tempra += str(int(hours))
+            minutes = hours % 1 * 60
+            tempra += " " + str(int(minutes))
+            seconds = minutes % 1 * 60
+            tempra += " " + str(round(seconds))
+            ET.SubElement(system, "rightascension").text = tempra
 
-            star = ET.SubElement(system,"star")
+            # convert declination to hh mm ss
+            tempdec = ""
+            dec = float(p['dec'])
+            hours = dec/ 360 * 24
+            tempdec+= str(int(hours))
+            minutes = hours % 1 * 60
+            tempdec+= " " + str(int(minutes))
+            seconds = minutes % 1 * 60
+            tempdec+= " " + str(int(round(seconds)))
+            ET.SubElement(system, "declination").text = tempdec
+
+            ET.SubElement(system, "distance").text = p["star_distance"]
+            star = ET.SubElement(system, "star")
             ET.SubElement(star, "name").text = p["star_name"]
             ET.SubElement(star, "age").text = p["star_age"]
             ET.SubElement(star, "radius").text = p["star_radius"]
@@ -44,16 +64,33 @@ def parse():
             ET.SubElement(star, "temperature").text = p["star_teff"]
             ET.SubElement(star, "metallicity").text = p["star_metallicity"]
 
-
-        # TODO: Add planet.
-        planet = ET.SubElement(star,"planet")
+        planet = ET.SubElement(star, "planet")
         ET.SubElement(planet, "name").text = p["name"]
+        ET.SubElement(planet, "semimajoraxis", errorminus=p["semi_major_axis_error_min"], errorplus=p["semi_major_axis_error_max"]).text = p["semi_major_axis"]
+        ET.SubElement(planet, "periastron", errorminus=p['omega_error_min'], errorplus=p['omega_error_max']).text = p["omega"]
+        ET.SubElement(planet, "eccentricity", errorminus=p['eccentricity_error_min'], errorplus=p['eccentricity_error_max']).text = p["eccentricity"]
+        ET.SubElement(planet, "longitude", errorminus=p['lambda_angle_error_min'], errorplus=p['lambda_angle_error_max']).text = p["lambda_angle"]
+        ET.SubElement(planet, "inclination", errorminus=p['inclination_error_min'], errorplus=p['inclination_error_max']).text = p["inclination"]
+        ET.SubElement(planet, "period", errorminus=p['orbital_period_err_min'], errorplus=p['orbital_period_err_max']).text = p["orbital_period"]
+        ET.SubElement(planet, "mass", errorminus=p['mass_error_min'], errorplus=p['mass_error_max']).text = p["mass"]
+        ET.SubElement(planet, "radius", errorminus=p['radius_error_min'], errorplus=p['radius_error_max']).text = p["radius"]
+        ET.SubElement(planet, "temperature").text = p["temp_measured"]
+        # to match OEC 
+        if p['detection_type'].find("radial") != -1:
+            ET.SubElement(planet, "discoverymethod").text = "RV"
+        elif p['detection_type'].find("imaging") != -1:
+            ET.SubElement(planet, "discoverymethod").text = "imaging"
+        elif p['detection_type'].find("transit") != -1:
+            ET.SubElement(planet, "discoverymethod").text = "transit"
+        ET.SubElement(planet, "discoveryyear").text = p["discovered"]
+        ET.SubElement(planet, "lastupdate").text = p["updated"].replace("-","/")[2:]
+
+        # ET.SubElement(planet, "spinorbitalignment").text = p[""]
 
         # Cleanup and write file
         xmltools.removeemptytags(system)
         xmltools.indent(system)
         ET.ElementTree(system).write(outputfilename) 
-
 
 if __name__=="__main__":
     get()
