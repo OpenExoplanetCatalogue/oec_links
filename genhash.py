@@ -44,16 +44,12 @@ def store_hash(filepath, catalogue):
     planet_catalogue_hash = planet_catalogue.find("./hash")
     if planet_catalogue_hash.text != m.hexdigest():
         # hash is new, update it and change date 
-        print catalogue, planet_catalogue.findtext("test")
-        print planet_catalogue_hash.text, m.hexdigest()
         planet_catalogue_hash.text = m.hexdigest()
         planet_catalogue_date = planet_catalogue.find(".//date")
         planet_catalogue_date.text = time.strftime("%d/%m/%y")
         xmltools.indent(system)
         tree.write("hashes/systemhashes.xml")
         print "stored hash for: " + filename
-    else:
-        print "Hash unchanged: " + filename
 
 def openexohash():
     for f in listdir("open_exoplanet_catalogue/systems"):
@@ -66,15 +62,6 @@ def euhash():
 def archivehash():
     for f in listdir("systems_exoplanetarchive"):
         store_hash("systems_exoplanetarchive/"+f, "exoplanet archive")
-
-def test(filepath):
-    hashs= []
-    for a in range(10):
-        m = hashlib.sha1()
-        m.update(open(filepath).read())
-        hashs.append(m.hexdigest())
-    print(hashs)
-
 
 if __name__ == "__main__":
     openexohash()
