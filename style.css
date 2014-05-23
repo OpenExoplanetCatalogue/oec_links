@@ -1,0 +1,6 @@
+td {
+	width: 10em;
+}
+td.newest { background-color: green; }
+td.notnewest { background-color: orange; }
+td.missing { background-color: red; }

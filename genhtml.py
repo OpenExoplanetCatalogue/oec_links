@@ -46,6 +46,9 @@ for system in hashes.findall("./system"):
                 td.attrib["class"] = "newest"
             else:
                 td.attrib["class"] = "notnewest"
+        else:
+            td.attrib["class"] = "missing"
+
 
 
     
