@@ -63,13 +63,3 @@ def removeemptytags(elem):
         elem.attrib['errorminus'] = err
         elem.attrib['errorplus'] = err
 
-def get_exceptions():
-    """ Returns a dictionary of the exception names, with the key as the improper name"""
-
-    f = open("identifierexceptions.txt")
-    exceptiondict = {}
-    for line in f:
-        if line != "":
-            exceptiondict[line.split(":::")[0]] = line.split(":::")[1].strip("\n")
-    return exceptiondict
-

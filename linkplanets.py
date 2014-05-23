@@ -27,9 +27,14 @@ for filename in glob.glob("open_exoplanet_catalogue/systems/*.xml"):
             aliases[name.text.lower().replace(" ","")] =planetid
             aliases[name.text.lower().replace(" ","").replace("-","")] =planetid
 
-name_except = xmltools.get_exceptions()
+# Find name exceptions
+f = open("identifierexceptions.txt")
+name_except = {}
+for line in f:
+    if line != "":
+        name_except[line.split(":::")[0]] = line.split(":::")[1].strip("\n")
 
-#catalogues = ["exoplaneteu"]
+
 catalogues = ["exoplaneteu", "exoplanetarchive"]
 for catalogue in catalogues:
     uniquelist_cat = uniquelist
