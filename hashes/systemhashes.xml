@@ -19968,21 +19968,6 @@
 		</catalogue>
 	</system>
 	<system>
-		<id>SWEEPS-</id>
-		<catalogue>
-			<name>open_exoplanet_catalogue</name>
-			<hash>af98edc435076b01a9138d7fb08b7056ba950c6b</hash>
-			<date>22/05/14</date>
-			<filename>SWEEPS-.xml</filename>
-		</catalogue>
-		<catalogue>
-			<name>exoplaneteu</name>
-			<hash>d5f3010fe1ae579a53e8ba42f999b18fc0daafc3</hash>
-			<date>23/05/14</date>
-			<filename>SWEEPS-04.xml</filename>
-		</catalogue>
-	</system>
-	<system>
 		<id>tau Boo</id>
 		<catalogue>
 			<name>open_exoplanet_catalogue</name>
@@ -22866,24 +22851,6 @@
 			<hash>a68358b94d64160afb7abc7a09886903c0ab8906</hash>
 			<date>22/05/14</date>
 			<filename>rho CrB.xml</filename>
-		</catalogue>
-	</system>
-	<system>
-		<id>SWEEPS-11 b</id>
-		<catalogue>
-			<name>exoplanetarchive</name>
-			<hash>44ae15159b6d6fd07499f41e063643609d70a32f</hash>
-			<date>22/05/14</date>
-			<filename>SWEEPS-11.xml</filename>
-		</catalogue>
-	</system>
-	<system>
-		<id>SWEEPS-4 b</id>
-		<catalogue>
-			<name>exoplanetarchive</name>
-			<hash>e8a80467936727f3d7bb04d5c28dd13b1d557cf1</hash>
-			<date>22/05/14</date>
-			<filename>SWEEPS-4.xml</filename>
 		</catalogue>
 	</system>
 	<system>

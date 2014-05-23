@@ -1,1 +1,2 @@
 HAT-P-30-WASP-51 b:::HAT-P-30 b
+HAT-P-27-WASP-40 b:::HAT-P-27 b
