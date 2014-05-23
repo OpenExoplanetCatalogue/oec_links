@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import hashlib
 import xml.etree.ElementTree as ET
 import xmltools
@@ -7,26 +8,31 @@ from os.path import isfile
 
 hashes = None
 
-
 def store_hash(filepath, catalogue):
     global hashes
+    global systemid
     """ Generates and stores the has value for the file and catalogue"""
 
+    filename = filepath[filepath.rfind("/")+1:]
+    contents = open(filepath).read()
 
     # generate hash
     m = hashlib.sha1()
-    m.update(open(filepath).read())
+    m.update(contents)
     fphash = m.hexdigest()
     
+    planetname = ET.fromstring(contents).findtext(".//planet/name")
+    
+    if planetname not in systemid:
+        print "Skipping " + filename
+        return
 
-    filename = filepath[filepath.rfind("/")+1:]
-    system = hashes.find("./system[filename='"+filename+"']")
+
+    system = hashes.find("./system[id='"+systemid[planetname]+"']")
     if system is None:
         # add the new hash for the file
         system = ET.Element("system")
-        system_filename = ET.Element("filename")
-        system_filename.text = filename
-        system.append(system_filename)
+        ET.SubElement(system,"id").text = systemid[planetname]
         hashes.append(system)
 
     # update the hash
@@ -41,6 +47,9 @@ def store_hash(filepath, catalogue):
         planet_catalogue.append(planet_hash)
         planet_date = ET.Element("date")
         planet_catalogue.append(planet_date)
+        planet_filename = ET.Element("filename")
+        planet_filename.text = filename
+        planet_catalogue.append(planet_filename)
         system.append(planet_catalogue)
 
     planet_catalogue_hash = planet_catalogue.find("./hash")
@@ -49,7 +58,6 @@ def store_hash(filepath, catalogue):
         planet_catalogue_hash.text = fphash
         planet_catalogue_date = planet_catalogue.find(".//date")
         planet_catalogue_date.text = time.strftime("%d/%m/%y")
-        print "stored hash for: " + filename
 
 def openexohash():
     for f in listdir("open_exoplanet_catalogue/systems"):
@@ -64,7 +72,17 @@ def archivehash():
         store_hash("systems_exoplanetarchive/"+f, "exoplanet archive")
 
 if __name__ == "__main__":
-    hashes = ET.parse("hashes/systemhashes.xml").getroot()
+    hashfilename = "hashes/systemhashes.xml"
+    if not isfile(hashfilename):
+        hashes = ET.Element("hashes")
+    else:
+        hashes = ET.parse(hashfilename).getroot()
+
+    systemid = {}
+    f = open("systemid.txt")
+    for line in f:
+        s = [x.strip() for x in line.split(":::")]
+        systemid[s[0]] = s[1]
 
     openexohash()
     euhash()

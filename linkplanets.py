@@ -6,7 +6,7 @@ import xmltools
 
 aliases = {}
 uniquelist = {}
-links = {}
+systemid = {}
 
 for filename in glob.glob("open_exoplanet_catalogue/systems/*.xml"):
     # Parse file
@@ -19,7 +19,7 @@ for filename in glob.glob("open_exoplanet_catalogue/systems/*.xml"):
         planetid = planet.findtext("name") # first element is id
         if root.findtext(".//name") !="Sun":  # ignore solar system
             uniquelist[planetid] = 0
-            links[planetid] = {"open_exoplanet_catalogue": {"planetid":planetid, "filename":filename}}
+            systemid[planetid] = os.path.basename("".join(filename.split(".")[:-1]))
         for name in planet.findall("name"):
             aliases[name.text] =planetid
             aliases[name.text.lower()] =planetid
@@ -61,14 +61,11 @@ for catalogue in catalogues:
             if key is not None:
                 # planet identified
                 uniquelist_cat[aliases[key]] = 1
-                links[aliases[key]][catalogue] = {"planetid":planetid, "filename":filename}
-                aliases[planetid] = aliases[key]
+                systemid[planetid] = systemid[aliases[key]]
             else:
                 # planet not identified
                 missingplanet_count += 1
-                if planetid not in links:
-                    links[planetid] = {}
-                links[planetid][catalogue] = {"planetid":planetid, "filename":filename}
+                systemid[planetid] =  planetid
 
 
     notaccountedfor = []
@@ -81,8 +78,8 @@ for catalogue in catalogues:
     print "OEC misses   \033[91m%d\033[0m planets which are in %s." %(missingplanet_count,catalogue)
     print "OEC contains \033[93m%d\033[0m planets which require exceptions when compared to %s." %(exception_count,catalogue)
 
-with open('aliases.csv', 'wb') as af:
-    for alias in aliases:
-        af.write(alias+":::"+aliases[alias]+"\n")
+with open('systemid.txt', 'wb') as af:
+    for key in systemid:
+        af.write(key+":::"+systemid[key]+"\n")
 
 af.close()
