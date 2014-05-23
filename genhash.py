@@ -61,7 +61,7 @@ def store_hash(filepath, catalogue):
 
 def openexohash():
     for f in listdir("open_exoplanet_catalogue/systems"):
-        store_hash("open_exoplanet_catalogue/systems/"+f, "open exoplanet catalogue")
+        store_hash("open_exoplanet_catalogue/systems/"+f, "open_exoplanet_catalogue")
 
 def euhash():
     for f in listdir("systems_exoplaneteu"):
@@ -69,7 +69,7 @@ def euhash():
 
 def archivehash():
     for f in listdir("systems_exoplanetarchive"):
-        store_hash("systems_exoplanetarchive/"+f, "exoplanet archive")
+        store_hash("systems_exoplanetarchive/"+f, "exoplanetarchive")
 
 if __name__ == "__main__":
     hashfilename = "hashes/systemhashes.xml"
