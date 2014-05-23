@@ -36,22 +36,21 @@ def parse():
             tempra = ""
             ra = float(p['ra'])
             hours = ra / 360 * 24
-            tempra += str(int(hours))
+            tempra += "%.2i" % (hours)
             minutes = hours % 1 * 60
-            tempra += " " + str(int(minutes))
+            tempra += " %.2i" % (minutes)
             seconds = minutes % 1 * 60
-            tempra += " " + str(round(seconds))
+            tempra += " %.2i" % (round(seconds))
             ET.SubElement(system, "rightascension").text = tempra
 
-            # convert declination to hh mm ss
+            # convert declination to deg mm ss
             tempdec = ""
             dec = float(p['dec'])
-            hours = dec/ 360 * 24
-            tempdec+= str(int(hours))
-            minutes = hours % 1 * 60
-            tempdec+= " " + str(int(minutes))
-            seconds = minutes % 1 * 60
-            tempdec+= " " + str(int(round(seconds)))
+            tempdec += "%+.2i" %(dec) 
+            minutes = dec % 1 * 60
+            tempdec += " %.2i" % (minutes)
+            seconds = round(minutes % 1 * 60)
+            tempdec+= " %.2i" % (seconds)
             ET.SubElement(system, "declination").text = tempdec
 
             ET.SubElement(system, "distance").text = p["star_distance"]
