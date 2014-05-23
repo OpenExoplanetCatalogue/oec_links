@@ -40,12 +40,18 @@ for system in hashes.findall("./system"):
         td = ET.SubElement(tr,"td")
         catinfo = system.find("./catalogue[name='"+cat+"']")
         if catinfo is not None:
-            td.text = catinfo.findtext("./date")
             date = catinfo.findtext("./date")
             if date == newestdate:
                 td.attrib["class"] = "newest"
             else:
                 td.attrib["class"] = "notnewest"
+            dl = ET.SubElement(td,"dl")
+            ET.SubElement(dl,"dt").text = "last updated"
+            ET.SubElement(dl,"dd").text = catinfo.findtext("./date")
+            ET.SubElement(dl,"dt").text = "filename"
+            ET.SubElement(dl,"dd").text = catinfo.findtext("./filename")
+            ET.SubElement(dl,"dt").text = "hash"
+            ET.SubElement(dl,"dd").text = catinfo.findtext("./hash")[0:8]
         else:
             td.attrib["class"] = "missing"
 

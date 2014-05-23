@@ -1,6 +1,33 @@
-td {
-	width: 10em;
+th {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
 }
-td.newest { background-color: green; }
+td {
+	width: 14em;
+	padding: 10px;
+	vertical-align: top;
+}
+th {
+	padding: 10px;
+	background-color: lightgray;
+	vertical-align: top;
+}
+
+td.newest { background-color: lightgreen; }
 td.notnewest { background-color: orange; }
-td.missing { background-color: red; }
+td.missing { background-color: #FF6666; }
+
+  dt {
+    float: left;
+    clear: left;
+    width: 6em;
+    text-align: right;
+    font-weight: bold;
+  }
+  dt:after {
+    content: ":";
+    padding-right: 0.5em; 
+  }
+  dd {
+  }
