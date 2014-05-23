@@ -646,7 +646,7 @@
 		<catalogue>
 			<name>open_exoplanet_catalogue</name>
 			<hash>082300d276534cf487113c3f434d2895f5ea4721</hash>
-			<date>22/05/14</date>
+			<date>23/05/14</date>
 			<filename>BD-061339.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -1921,7 +1921,7 @@
 		<catalogue>
 			<name>exoplaneteu</name>
 			<hash>81290e4b60e7a063d280ee0d126b1378be6d7050</hash>
-			<date>22/05/14</date>
+			<date>23/05/14</date>
 			<filename>Gl 785.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -6457,7 +6457,7 @@
 		<catalogue>
 			<name>exoplaneteu</name>
 			<hash>8af13073012bfab3a81aa9225f231de6cf961a94</hash>
-			<date>22/05/14</date>
+			<date>23/05/14</date>
 			<filename>HD 20781.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -18058,7 +18058,7 @@
 		<catalogue>
 			<name>exoplaneteu</name>
 			<hash>3c24e29c17ae1a71290d7dd10925c6333953bbe6</hash>
-			<date>22/05/14</date>
+			<date>23/05/14</date>
 			<filename>Kepler-82 .xml</filename>
 		</catalogue>
 		<catalogue>
@@ -18703,7 +18703,7 @@
 		<catalogue>
 			<name>open_exoplanet_catalogue</name>
 			<hash>b91e8fdc42a1812ede69f36a7f27f2dc60a3e995</hash>
-			<date>22/05/14</date>
+			<date>23/05/14</date>
 			<filename>ksi Aql.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -18921,8 +18921,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>928719088789470077c646c9c3ab527db5f6701d</hash>
-			<date>22/05/14</date>
+			<hash>294d01ecfbc5eb06df8e1c75f5f8546a580a31c7</hash>
+			<date>23/05/14</date>
 			<filename>MOA-2010-BLG-477L.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -19978,7 +19978,7 @@
 		<catalogue>
 			<name>exoplaneteu</name>
 			<hash>d5f3010fe1ae579a53e8ba42f999b18fc0daafc3</hash>
-			<date>22/05/14</date>
+			<date>23/05/14</date>
 			<filename>SWEEPS-04.xml</filename>
 		</catalogue>
 	</system>
@@ -20247,8 +20247,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>59961261c8c23c3e0c053e91edf4855aa6db9c79</hash>
-			<date>22/05/14</date>
+			<hash>d2ade83bb9e6bba7082a1327d893689a64a3ed30</hash>
+			<date>23/05/14</date>
 			<filename>WASP-10.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -20367,8 +20367,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>166eadd73238f2c085440b71f8173114fd69ac57</hash>
-			<date>22/05/14</date>
+			<hash>9d0df14e05c83b54f978edb6fae71e93f92733f4</hash>
+			<date>23/05/14</date>
 			<filename>WASP-13.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -20388,8 +20388,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>568e3f776913ef799985b3ea0933cb73bb72bddd</hash>
-			<date>22/05/14</date>
+			<hash>b2917fd93d6e547be54f0fb27bcb97f2353f53ba</hash>
+			<date>23/05/14</date>
 			<filename>WASP-14.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -20592,8 +20592,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>de59cbd656723b71451bd5c5c34c480dad90c2f0</hash>
-			<date>22/05/14</date>
+			<hash>2360186cdff538867410a87745002511e8229ac0</hash>
+			<date>23/05/14</date>
 			<filename>WASP-23.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -20613,8 +20613,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>23fa415ee90cdccc813b38f33badcdde1c7915d4</hash>
-			<date>22/05/14</date>
+			<hash>4b8c6a42b8cee05c8c342f6b262438fa69b02205</hash>
+			<date>23/05/14</date>
 			<filename>WASP-24.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -20859,8 +20859,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>e471758ee9a88ee95a7674d922b14a22319df9a8</hash>
-			<date>22/05/14</date>
+			<hash>bd1e0e3d3f62f6f11f54f02827152fa08d08c197</hash>
+			<date>23/05/14</date>
 			<filename>WASP-37.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -21336,8 +21336,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>dca3070a6675f75cf522f08b61c298f40631538c</hash>
-			<date>22/05/14</date>
+			<hash>2572dd4b5a5670d9e83fa504fc33af4133be6d81</hash>
+			<date>23/05/14</date>
 			<filename>WASP-6.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -21759,8 +21759,8 @@
 		</catalogue>
 		<catalogue>
 			<name>exoplaneteu</name>
-			<hash>36c80e7e666424034d1efab758dd29148c0d496f</hash>
-			<date>22/05/14</date>
+			<hash>192fd5bb04e2113d0b1eaefcece29bc084111980</hash>
+			<date>23/05/14</date>
 			<filename>WASP-8.xml</filename>
 		</catalogue>
 		<catalogue>
@@ -22902,6 +22902,48 @@
 			<hash>a46cbc41f1591326ed6fa834865c19debbefc268</hash>
 			<date>22/05/14</date>
 			<filename>WISEP J121756.91+162640.2 A.xml</filename>
+		</catalogue>
+	</system>
+	<system>
+		<id>SWEEPS-11</id>
+		<catalogue>
+			<name>open_exoplanet_catalogue</name>
+			<hash>5f7268bfaf0234bb2794dbdf45ca354ef702e9c8</hash>
+			<date>23/05/14</date>
+			<filename>SWEEPS-11.xml</filename>
+		</catalogue>
+		<catalogue>
+			<name>exoplaneteu</name>
+			<hash>d5f3010fe1ae579a53e8ba42f999b18fc0daafc3</hash>
+			<date>23/05/14</date>
+			<filename>SWEEPS-11.xml</filename>
+		</catalogue>
+		<catalogue>
+			<name>exoplanetarchive</name>
+			<hash>44ae15159b6d6fd07499f41e063643609d70a32f</hash>
+			<date>23/05/14</date>
+			<filename>SWEEPS-11.xml</filename>
+		</catalogue>
+	</system>
+	<system>
+		<id>SWEEPS-4</id>
+		<catalogue>
+			<name>open_exoplanet_catalogue</name>
+			<hash>7368d740709308f4d5ad239ae84e5b27df0ed94d</hash>
+			<date>23/05/14</date>
+			<filename>SWEEPS-4.xml</filename>
+		</catalogue>
+		<catalogue>
+			<name>exoplaneteu</name>
+			<hash>823263748d803990012a132304c2b0010966da19</hash>
+			<date>23/05/14</date>
+			<filename>SWEEPS-04.xml</filename>
+		</catalogue>
+		<catalogue>
+			<name>exoplanetarchive</name>
+			<hash>e8a80467936727f3d7bb04d5c28dd13b1d557cf1</hash>
+			<date>23/05/14</date>
+			<filename>SWEEPS-4.xml</filename>
 		</catalogue>
 	</system>
 </hashes>
