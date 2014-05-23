@@ -73,3 +73,13 @@ def get_exceptions():
             exceptiondict[line.split(":::")[0]] = line.split(":::")[1].strip("\n")
     return exceptiondict
 
+def get_aliases():
+    """ Returns a dictionary of the aliases """
+
+    f = open("aliases.txt")
+    aliasesdict = {}
+    for line in f:
+        if line != "":
+            aliasesdict[line.split(":::")[0]] = line.split(":::")[1].strip("\n")
+    return aliasesdict
+
