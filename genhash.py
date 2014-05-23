@@ -7,6 +7,7 @@ from os import listdir
 from os.path import isfile
 
 hashes = None
+updatedsystemids = []
 
 def store_hash(filepath, catalogue):
     global hashes
@@ -27,13 +28,14 @@ def store_hash(filepath, catalogue):
         print "Skipping " + filename
         return
 
-
+    updatedsystemids.append(systemid[planetname])
     system = hashes.find("./system[id='"+systemid[planetname]+"']")
     if system is None:
         # add the new hash for the file
         system = ET.Element("system")
         ET.SubElement(system,"id").text = systemid[planetname]
         hashes.append(system)
+
 
     # update the hash
     planet_catalogue = system.find("./catalogue[name='"+catalogue+"']")
@@ -87,6 +89,17 @@ if __name__ == "__main__":
     openexohash()
     euhash()
     archivehash()
+
+    oldsystems = []
+
+    systems = hashes.findall("./system")
+    for system in systems:
+        if system.findtext("./id") not in updatedsystemids:
+            oldsystems.append(system)
+            print "Found old system with id='" + system.findtext("./id")+"'. Will be removed."
+
+    for oldsystem in oldsystems:
+        hashes.remove(oldsystem)
 
     xmltools.indent(hashes)
     ET.ElementTree(hashes).write("hashes/systemhashes.xml")
