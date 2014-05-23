@@ -17,6 +17,7 @@ th {
 td.newest { background-color: lightgreen; }
 td.notnewest { background-color: orange; }
 td.missing { background-color: #FF6666; }
+td.basedate { background-color: #eee; }
 
   dt {
     float: left;

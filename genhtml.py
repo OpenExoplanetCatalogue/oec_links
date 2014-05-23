@@ -7,6 +7,7 @@ from os import listdir
 from os.path import isfile
 
 catalogues = ["open_exoplanet_catalogue", "exoplaneteu", "exoplanetarchive"]
+basedate = "14/05/23"
 
 hashfilename = "hashes/systemhashes.xml"
 hashes = ET.parse(hashfilename).getroot()
@@ -24,11 +25,9 @@ ET.SubElement(tr,"th").text = "systemid"
 for cat in catalogues:
     ET.SubElement(tr,"th").text = cat
 
+rows=[]
 
 for system in hashes.findall("./system"):
-    tr = ET.SubElement(table,"tr")
-    th = ET.SubElement(tr,"th")
-    th.text = system.findtext("./id")
     newestdate = ""
     for cat in catalogues:
         catinfo = system.find("./catalogue[name='"+cat+"']")
@@ -36,6 +35,10 @@ for system in hashes.findall("./system"):
             date = catinfo.findtext("./date")
             if date > newestdate:
                 newestdate = date
+    
+    tr = ET.Element("tr")
+    th = ET.SubElement(tr,"th")
+    th.text = system.findtext("./id")
     for cat in catalogues:
         td = ET.SubElement(tr,"td")
         catinfo = system.find("./catalogue[name='"+cat+"']")
@@ -45,6 +48,9 @@ for system in hashes.findall("./system"):
                 td.attrib["class"] = "newest"
             else:
                 td.attrib["class"] = "notnewest"
+            if date == basedate:
+                td.attrib["class"] = "basedate"
+
             dl = ET.SubElement(td,"dl")
             ET.SubElement(dl,"dt").text = "last updated"
             ET.SubElement(dl,"dd").text = catinfo.findtext("./date")
@@ -55,8 +61,12 @@ for system in hashes.findall("./system"):
         else:
             td.attrib["class"] = "missing"
 
+    rows.append({"newestdate":newestdate,"tr":tr})
 
-
+rows.sort(key=lambda k: k['newestdate'],reverse=True)
     
+for row in rows:
+    table.append(row['tr'])
+
 xmltools.indent(html)
 ET.ElementTree(html).write("status.html")

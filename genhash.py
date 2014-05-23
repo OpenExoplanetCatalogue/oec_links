@@ -59,7 +59,7 @@ def store_hash(filepath, catalogue):
         # hash is new, update it and change date 
         planet_catalogue_hash.text = fphash
         planet_catalogue_date = planet_catalogue.find(".//date")
-        planet_catalogue_date.text = time.strftime("%d/%m/%y")
+        planet_catalogue_date.text = time.strftime("%y/%m/%d")
 
 def openexohash():
     for f in listdir("open_exoplanet_catalogue/systems"):
