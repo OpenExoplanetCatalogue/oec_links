@@ -2470,6 +2470,12 @@
 			<date>14/05/23</date>
 			<filename>HAT-P-27.xml</filename>
 		</catalogue>
+		<catalogue>
+			<name>exoplaneteu</name>
+			<hash>3884415a8e8947d5d12847f3aa8d94a2ad6df61d</hash>
+			<date>14/05/23</date>
+			<filename>HAT-P-27-WASP-40.xml</filename>
+		</catalogue>
 	</system>
 	<system>
 		<id>HAT-P-28</id>
@@ -19654,6 +19660,12 @@
 			<date>14/05/23</date>
 			<filename>PH1.xml</filename>
 		</catalogue>
+		<catalogue>
+			<name>exoplaneteu</name>
+			<hash>d401ff4b076e43418a8e05ef35b0dabc66468e56</hash>
+			<date>14/05/23</date>
+			<filename>KIC 4862625(AB).xml</filename>
+		</catalogue>
 	</system>
 	<system>
 		<id>PH-2</id>
@@ -20361,6 +20373,12 @@
 			<hash>7bef65b9e74cd518914b9f8d795683e30fa35367</hash>
 			<date>14/05/23</date>
 			<filename>WASP-11.xml</filename>
+		</catalogue>
+		<catalogue>
+			<name>exoplaneteu</name>
+			<hash>afd0c3ee80c528a59fa5fc92cdba434d7bf14a52</hash>
+			<date>14/05/23</date>
+			<filename>WASP-11-HAT-P-10.xml</filename>
 		</catalogue>
 	</system>
 	<system>
@@ -22365,15 +22383,6 @@
 		</catalogue>
 	</system>
 	<system>
-		<id>HAT-P-27-WASP-40 b</id>
-		<catalogue>
-			<name>exoplaneteu</name>
-			<hash>3884415a8e8947d5d12847f3aa8d94a2ad6df61d</hash>
-			<date>14/05/23</date>
-			<filename>HAT-P-27-WASP-40.xml</filename>
-		</catalogue>
-	</system>
-	<system>
 		<id>HD 41004 B b</id>
 		<catalogue>
 			<name>exoplaneteu</name>
@@ -22461,15 +22470,6 @@
 			<hash>cff09c4f7e51c1bf701c237aae659836ae76c3c3</hash>
 			<date>14/05/23</date>
 			<filename>KIC 12557548.xml</filename>
-		</catalogue>
-	</system>
-	<system>
-		<id>PH1-Kepler-64 b</id>
-		<catalogue>
-			<name>exoplaneteu</name>
-			<hash>d401ff4b076e43418a8e05ef35b0dabc66468e56</hash>
-			<date>14/05/23</date>
-			<filename>KIC 4862625(AB).xml</filename>
 		</catalogue>
 	</system>
 	<system>
@@ -22677,15 +22677,6 @@
 			<hash>b2096e9e0c9a3366c8f13eaa1ec222f48f85ed03</hash>
 			<date>14/05/23</date>
 			<filename>USco1612-1800.xml</filename>
-		</catalogue>
-	</system>
-	<system>
-		<id>WASP-11-HAT-P-10 b</id>
-		<catalogue>
-			<name>exoplaneteu</name>
-			<hash>afd0c3ee80c528a59fa5fc92cdba434d7bf14a52</hash>
-			<date>14/05/23</date>
-			<filename>WASP-11-HAT-P-10.xml</filename>
 		</catalogue>
 	</system>
 	<system>

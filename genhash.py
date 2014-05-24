@@ -61,17 +61,7 @@ def store_hash(filepath, catalogue):
         planet_catalogue_date = planet_catalogue.find(".//date")
         planet_catalogue_date.text = time.strftime("%y/%m/%d")
 
-def openexohash():
-    for f in listdir("open_exoplanet_catalogue/systems"):
-        store_hash("open_exoplanet_catalogue/systems/"+f, "open_exoplanet_catalogue")
-
-def euhash():
-    for f in listdir("systems_exoplaneteu"):
-        store_hash("systems_exoplaneteu/"+f, "exoplaneteu")
-
-def archivehash():
-    for f in listdir("systems_exoplanetarchive"):
-        store_hash("systems_exoplanetarchive/"+f, "exoplanetarchive")
+catalogues = ["open_exoplanet_catalogue", "exoplaneteu", "exoplanetarchive"]
 
 if __name__ == "__main__":
     hashfilename = "hashes/systemhashes.xml"
@@ -86,9 +76,9 @@ if __name__ == "__main__":
         s = [x.strip() for x in line.split(":::")]
         systemid[s[0]] = s[1]
 
-    openexohash()
-    euhash()
-    archivehash()
+    for cat in catalogues:
+        for f in listdir("systems_"+cat):
+            store_hash("systems_"+cat+"/"+f, cat)
 
     oldsystems = []
 
