@@ -8,7 +8,7 @@ aliases = {}
 uniquelist = {}
 systemid = {}
 
-for filename in glob.glob("open_exoplanet_catalogue/systems/*.xml"):
+for filename in glob.glob("oec_external/systems_open_exoplanet_catalogue/*.xml"):
     # Parse file
     root = ET.parse(filename).getroot()
     # Construct a parent map
@@ -40,7 +40,7 @@ for catalogue in catalogues:
     uniquelist_cat = uniquelist
     exception_count = 0
     missingplanet_count = 0
-    for filename in glob.glob("systems_"+catalogue+"/*.xml"):
+    for filename in glob.glob("oec_external/systems_"+catalogue+"/*.xml"):
         # Parse file
         root = ET.parse(filename).getroot()
 
@@ -61,7 +61,7 @@ for catalogue in catalogues:
                 key = planetid.lower().replace(" ","").replace("-","")
             elif name_except.has_key(planetid):
                 key = name_except[planetid]
-                print "Using exception for:\033[93m", planetid,"->", name_except[planetid],"\033[0m"
+                print "Using exception for:\033[1m", planetid,"->", name_except[planetid],"\033[0m"
                 exception_count += 1
             if key is not None:
                 # planet identified
@@ -80,8 +80,8 @@ for catalogue in catalogues:
             notaccountedfor.append(key)
                 
     print "OEC contains \033[1m%d\033[0m planets which are not in %s." %(len(notaccountedfor),catalogue)
-    print "OEC misses   \033[91m%d\033[0m planets which are in %s." %(missingplanet_count,catalogue)
-    print "OEC contains \033[93m%d\033[0m planets which require exceptions when compared to %s." %(exception_count,catalogue)
+    print "OEC misses   \033[1m%d\033[0m planets which are in %s." %(missingplanet_count,catalogue)
+    print "OEC contains \033[1m%d\033[0m planets which require exceptions when compared to %s." %(exception_count,catalogue)
 
 with open('systemid.txt', 'wb') as af:
     for key in systemid:
