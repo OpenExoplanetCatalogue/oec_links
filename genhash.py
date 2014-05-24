@@ -77,8 +77,8 @@ if __name__ == "__main__":
         systemid[s[0]] = s[1]
 
     for cat in catalogues:
-        for f in listdir("systems_"+cat):
-            store_hash("systems_"+cat+"/"+f, cat)
+        for f in listdir("oec_external/systems_"+cat):
+            store_hash("oec_external/systems_"+cat+"/"+f, cat)
 
     oldsystems = []
 
