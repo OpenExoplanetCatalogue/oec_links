@@ -22880,4 +22880,13 @@
 			<filename>WISEP J121756.91+162640.2 A.xml</filename>
 		</catalogue>
 	</system>
+	<system>
+		<id>KIC 10255705 b</id>
+		<catalogue>
+			<name>exoplaneteu</name>
+			<hash>667eb208ddbc0ec1fcff5020aae8c9ebcf275d89</hash>
+			<date>14/05/23</date>
+			<filename>KIC 10255705.xml</filename>
+		</catalogue>
+	</system>
 </hashes>
