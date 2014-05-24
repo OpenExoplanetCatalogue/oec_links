@@ -11,15 +11,15 @@ import csv
 url_exoplaneteu = "http://exoplanet.eu/catalog/csv/"
 
 def get():
-    xmltools.ensure_empty_dir("exoplaneteu")
-    urllib.urlretrieve (url_exoplaneteu, "exoplaneteu/exoplanet.eu_catalog.csv")
+    xmltools.ensure_empty_dir("tmp_data")
+    urllib.urlretrieve (url_exoplaneteu, "tmp_data/exoplanet.eu_catalog.csv")
 
 def parse():
     # delete old data
     xmltools.ensure_empty_dir("systems_exoplaneteu")
 
     # parse data into default xml format
-    f = open("exoplaneteu/exoplanet.eu_catalog.csv")
+    f = open("tmp_data/exoplanet.eu_catalog.csv")
     header = [x.strip() for x in f.readline()[1:].replace("# ", "").split(",")]
     reader = csv.reader(f)
     for line in reader:

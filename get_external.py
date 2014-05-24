@@ -1,14 +1,10 @@
 #!/usr/bin/python
-import urllib
-import os
-import xml.etree.ElementTree as ET 
+import openexoplanetcatalogue
 import exoplaneteu
 import exoplanetarchive
 
-#####################
-# Configuration
-#####################
-
+openexoplanetcatalogue.get()
+openexoplanetcatalogue.parse()
 	
 exoplaneteu.get()
 exoplaneteu.parse()

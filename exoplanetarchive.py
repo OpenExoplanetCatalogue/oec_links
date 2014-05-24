@@ -11,15 +11,15 @@ import genhash
 url_exoplanetarchive = "http://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&format=csv&select=*"
 
 def get():
-    xmltools.ensure_empty_dir("exoplanetarchive")
-    urllib.urlretrieve (url_exoplanetarchive, "exoplanetarchive/exoplanetarchive.csv")
+    xmltools.ensure_empty_dir("tmp_data")
+    urllib.urlretrieve (url_exoplanetarchive, "tmp_data/exoplanetarchive.csv")
 
 def parse():
     # delete old data
     xmltools.ensure_empty_dir("systems_exoplanetarchive")
 
     # parse data into default xml format
-    f = open("exoplanetarchive/exoplanetarchive.csv")
+    f = open("tmp_data/exoplanetarchive.csv")
     header = [x.strip() for x in f.readline().split(",")]
     for line in f:
         p = dict(zip(header, [x.strip() for x in line.split(",")]))
