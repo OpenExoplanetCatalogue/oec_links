@@ -103,7 +103,7 @@ for tr in table.findall("./tr"):
         if date == basedate and newestdate == basedate:
             td.attrib["class"] = "basedate"
             if td.attrib["id"] == "open_exoplanet_catalogue":
-                significance = 2        # oec and external on basedate
+                significance = 1    # oec and external on basedate
         elif date == newestdate:
             td.attrib["class"] = "newest"
             if td.attrib["id"] == "open_exoplanet_catalogue":
@@ -111,7 +111,7 @@ for tr in table.findall("./tr"):
         else:
             td.attrib["class"] = "notnewest"
             if td.attrib["id"] == "open_exoplanet_catalogue":
-                significance = 1    # oec not up-to-date
+                significance = 2    # oec not up-to-date
     tr.attrib["significance"] = "%d" % significance
 
 xmltools.indent(html)
