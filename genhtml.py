@@ -16,6 +16,15 @@ link = ET.SubElement(head,"link")
 link.attrib["rel"] ="stylesheet"
 link.attrib["type"]="text/css"
 link.attrib["href"]="style.css"
+script = ET.SubElement(head,"script")
+script.attrib["src"]="jquery-2.1.1.min.js"
+script.text=" "
+script = ET.SubElement(head,"script")
+script.attrib["src"]="jquery.tinysort.min.js"
+script.text=" "
+script = ET.SubElement(head,"script")
+script.attrib["src"]="jscript.js"
+script.text=" "
 body = ET.SubElement(html,"body")
 table = ET.SubElement(body,"table")
 tr = ET.SubElement(table,"tr")
@@ -82,6 +91,9 @@ os.chdir("../")
 for tr in table.findall("./tr"):
     newestdate = ""
     significance = 3                # system not in oec
+    for td in tr.findall("./td[@id]"):
+        if "date" not in td.attrib:
+            td.attrib["class"] = "missing"
     for td in tr.findall("./td[@date]"):
         date = td.attrib["date"]
         if date > newestdate:
@@ -90,7 +102,8 @@ for tr in table.findall("./tr"):
         date = td.attrib["date"]
         if date == basedate and newestdate == basedate:
             td.attrib["class"] = "basedate"
-            significance = 2        # oec and external on basedate
+            if td.attrib["id"] == "open_exoplanet_catalogue":
+                significance = 2        # oec and external on basedate
         elif date == newestdate:
             td.attrib["class"] = "newest"
             if td.attrib["id"] == "open_exoplanet_catalogue":
@@ -100,18 +113,6 @@ for tr in table.findall("./tr"):
             if td.attrib["id"] == "open_exoplanet_catalogue":
                 significance = 1    # oec not up-to-date
     tr.attrib["significance"] = "%d" % significance
-
-# sort
-data = []
-trs = table.find("tr")
-for tr in trs:
-    try:
-        key = int(tr.attrib["significance"])
-    except:
-        key = 999
-    data.append((key, tr))
-data.sort()
-trs[:] = [item[-1] for item in data]
 
 xmltools.indent(html)
 ET.ElementTree(html).write("status.html")
