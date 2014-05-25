@@ -6,7 +6,7 @@ import xmltools
 
 aliases = {}
 uniquelist = {}
-systemid = {}
+systemids = {}
 
 for filename in glob.glob("oec_external/systems_open_exoplanet_catalogue/*.xml"):
     # Parse file
@@ -19,7 +19,7 @@ for filename in glob.glob("oec_external/systems_open_exoplanet_catalogue/*.xml")
         planetid = planet.findtext("name") # first element is id
         if root.findtext(".//name") !="Sun":  # ignore solar system
             uniquelist[planetid] = 0
-            systemid[planetid] = os.path.basename("".join(filename.split(".")[:-1]))
+            systemids[planetid] = os.path.basename("".join(filename.split(".")[:-1]))
         for name in planet.findall("name"):
             aliases[name.text] =planetid
             aliases[name.text.lower()] =planetid
@@ -66,11 +66,11 @@ for catalogue in catalogues:
             if key is not None:
                 # planet identified
                 uniquelist_cat[aliases[key]] = 1
-                systemid[planetid] = systemid[aliases[key]]
+                systemids[planetid] = systemids[aliases[key]]
             else:
                 # planet not identified
                 missingplanet_count += 1
-                systemid[planetid] =  planetid
+                systemids[planetid] =  planetid
 
 
     notaccountedfor = []
@@ -83,8 +83,8 @@ for catalogue in catalogues:
     print "OEC misses   \033[1m%d\033[0m planets which are in %s." %(missingplanet_count,catalogue)
     print "OEC contains \033[1m%d\033[0m planets which require exceptions when compared to %s." %(exception_count,catalogue)
 
-with open('systemid.txt', 'wb') as af:
-    for key in systemid:
-        af.write(key+":::"+systemid[key]+"\n")
+with open('systemids.txt', 'wb') as af:
+    for key in systemids:
+        af.write(key+":::"+systemids[key]+"\n")
 
 af.close()
