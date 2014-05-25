@@ -79,9 +79,9 @@ os.chdir("../")
 
 
 # decorate
-
 for tr in table.findall("./tr"):
     newestdate = ""
+    significance = 3                # system not in oec
     for td in tr.findall("./td[@date]"):
         date = td.attrib["date"]
         if date > newestdate:
@@ -90,10 +90,28 @@ for tr in table.findall("./tr"):
         date = td.attrib["date"]
         if date == basedate and newestdate == basedate:
             td.attrib["class"] = "basedate"
+            significance = 2        # oec and external on basedate
         elif date == newestdate:
             td.attrib["class"] = "newest"
+            if td.attrib["id"] == "open_exoplanet_catalogue":
+                significance = 0    # oec up-to-date
         else:
             td.attrib["class"] = "notnewest"
+            if td.attrib["id"] == "open_exoplanet_catalogue":
+                significance = 1    # oec not up-to-date
+    tr.attrib["significance"] = "%d" % significance
+
+# sort
+data = []
+trs = table.find("tr")
+for tr in trs:
+    try:
+        key = int(tr.attrib["significance"])
+    except:
+        key = 999
+    data.append((key, tr))
+data.sort()
+trs[:] = [item[-1] for item in data]
 
 xmltools.indent(html)
 ET.ElementTree(html).write("status.html")
