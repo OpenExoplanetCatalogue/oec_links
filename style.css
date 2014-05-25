@@ -4,7 +4,7 @@ th {
 	padding: 0px;
 }
 td {
-	width: 14em;
+	width: 16em;
 	padding: 10px;
 	vertical-align: top;
 }
@@ -14,9 +14,14 @@ th {
 	vertical-align: top;
 }
 
-dd div {
-	width: 12em;
+td div {
+	width: 16em;
 	overflow:auto;
+}
+
+a {
+	margin: 0px;
+	padding: 0px;
 }
 
 td.newest { background-color: lightgreen; }

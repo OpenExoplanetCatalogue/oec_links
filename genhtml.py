@@ -58,7 +58,8 @@ for cat in catalogues:
             continue
 
         # get git info
-        gitlog = subprocess.Popen(["git", "log", "-1", "-p", "--format=%ad", "--date=short","--numstat",filepath], stdout=subprocess.PIPE).communicate()[0]
+        #gitlog = subprocess.Popen(["git", "log", "-1", "-p", "--format=%ad", "--date=short","--numstat",filepath], stdout=subprocess.PIPE).communicate()[0]
+        gitlog = subprocess.Popen(["git", "log", "-1", "--format=%ad", "--date=short","--numstat",filepath], stdout=subprocess.PIPE).communicate()[0]
         gitlines = gitlog.split("\n")
         gitdate  = gitlines[0].split(" ")[-1].strip().replace("-","/")
         gitstats = "/".join(gitlines[2].split("\t")[0:2])
@@ -83,10 +84,14 @@ for cat in catalogues:
         ET.SubElement(dl,"dd").text = filename
         ET.SubElement(dl,"dt").text = "change +/-"
         ET.SubElement(dl,"dd").text = gitstats
-        ET.SubElement(dl,"dt").text = "show diff"
-        dd = ET.SubElement(dl,"dd")
-        div = ET.SubElement(dd,"div")
-        ET.SubElement(dd,"pre").text = "\n".join(gitlines[10:]).decode("utf-8")
+        a = ET.SubElement(td,"a")
+        a.text = "show diff"
+        a.attrib["href"]=filepath
+        a.attrib["class"]="showdiff"
+        a = ET.SubElement(td,"a")
+        a.text = "show filef"
+        a.attrib["href"]=filepath
+        a.attrib["class"]="showfile"
 
     
 
@@ -121,4 +126,4 @@ for tr in table.findall("./tr"):
     tr.attrib["significance"] = "%d" % significance
 
 xmltools.indent(html)
-ET.ElementTree(html).write("status.html")
+ET.ElementTree(html).write("index.html")
