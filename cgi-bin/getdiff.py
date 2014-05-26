@@ -12,15 +12,18 @@ gitlines = [cgi.escape(x) for x in  gitlog.split("\n") ]
 print "<div style='background-color:white;overflow:auto;'>"
 print "<pre style=''>"
 for line in gitlines[10:]:
-    if line[0]=="+":
-        print "<span style='color:green;'>",
-    elif line[0]=="-":
-        print "<span style='color:red;'>",
+    if len(line)>1:
+        if line[0]=="+":
+            print "<span style='color:green;'>",
+        elif line[0]=="-":
+            print "<span style='color:red;'>",
 
-    print line,
-    if line[0]=="+" or line[0]=="-":
-        print "</span>"
+        print line,
+        if line[0]=="+" or line[0]=="-":
+            print "</span>"
+        else:
+            print 
     else:
-        print 
+        print line
 print "</pre>"
 print "</div>"
